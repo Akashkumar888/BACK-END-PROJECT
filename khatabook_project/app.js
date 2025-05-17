@@ -43,6 +43,7 @@ app.post("/update/:filename",function(req,res,next){
 })
 
 
+
 app.get("/hisaab/:filename",function(req,res){
   fs.readFile(`./hisaab/${req.params.filename}`,'utf-8',function(err,filedata){
     if(err)return res.status(500).send(err);
@@ -75,7 +76,13 @@ app.post("/createhisaab",function(req,res,next){
 
 
 
-app.listen(3000);
+// app.listen(3000);
+
+app.listen(3000, () => {
+  console.log("Server is running on http://localhost:3000");
+});
+
+
 
 
 
