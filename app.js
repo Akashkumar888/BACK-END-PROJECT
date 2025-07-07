@@ -15,6 +15,16 @@ app.use(express.static(path.join(__dirname,"public")));
 
 dbConnect();
 
+// ✅ Ensure ./hisaab folder exists
+const hisaabPath = path.join(__dirname, 'hisaab');
+if (!fs.existsSync(hisaabPath)) {
+  fs.mkdirSync(hisaabPath, { recursive: true });
+}
+
+
+
+
+
 app.get("/", function(req, res, next) {
   fs.readdir("./hisaab", function(err, data) {
     if (err) return res.status(500).send(err); // fixed: remove extra res
