@@ -1,0 +1,24 @@
+{
+  "name": "multer",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+  "tailwind": "npx tailwindcss -i ./public/input.css -o ./public/output.css --watch",
+  "serve": "nodemon app.js",
+  "dev": "npm-run-all --parallel tailwind serve"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "bcrypt": "^6.0.0",
+    "ejs": "^3.1.10",
+    "env": "^0.0.2",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.0",
+    "multer": "^2.0.1",
+    "tailwindcss": "^4.1.11"
+  }
+}
