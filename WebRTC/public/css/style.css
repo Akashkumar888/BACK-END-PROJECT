@@ -1,0 +1,67 @@
+
+
+/* style.css */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #121212;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#videos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+video-player {
+  width: 320px;
+  height: 240px;
+  background-color: black;
+  border: 2px solid #444;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+#controls {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.control-container {
+  /* background-color: #1f1f1f; */
+  background-color: green; /* ✅ green background circle */
+  padding: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.control-container:hover {
+  background-color: #333;
+}
+
+svg {
+  display: block;
+  fill: white;
+}
+
+/* svg path {
+  fill: green;
+} */
+

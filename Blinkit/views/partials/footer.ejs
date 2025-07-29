@@ -1,0 +1,34 @@
+<!-- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- Your content here -->
+
+  <script>
+    // Save scroll position
+    window.addEventListener('scroll', function () {
+      localStorage.setItem('scrollPosition', window.scrollY);
+    });
+
+    // Restore scroll position
+    window.addEventListener('load', function () {
+      const scrollPosition = localStorage.getItem('scrollPosition');
+      if (scrollPosition !== null) {
+        window.scrollTo(0, parseInt(scrollPosition));
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+ -->
+
+ 

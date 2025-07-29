@@ -1,0 +1,48 @@
+/* Custom styles for the doctor booking app */
+
+/* Ensure payment button is visible */
+.payment-button {
+  background-color: #10B98E !important;
+  color: white !important;
+  padding: 16px 24px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  width: 100% !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  display: block !important;
+  margin-top: 20px !important;
+}
+
+.payment-button:hover {
+  background-color: #0A8B6B !important;
+  transform: scale(1.02) !important;
+}
+
+.payment-button:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Fallback styles for primary color */
+.bg-primary {
+  background-color: #10B98E !important;
+}
+
+.text-primary {
+  color: #10B98E !important;
+}
+
+.border-primary {
+  border-color: #10B98E !important;
+}
+
+.focus\:ring-primary:focus {
+  --tw-ring-color: #10B98E !important;
+}
+
+.focus\:border-primary:focus {
+  border-color: #10B98E !important;
+}

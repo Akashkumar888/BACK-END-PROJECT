@@ -1,0 +1,24 @@
+{
+  "name": "websockets",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+  "dev": "concurrently \"npx tailwindcss -i ./src/input.css -o ./public/output.css --watch\" \"nodemon app.js --ignore public/output.css\""
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "env": "^0.0.2",
+    "express": "^5.1.0",
+    "http": "^0.0.1-security",
+    "mongoose": "^8.16.1",
+    "path": "^0.12.7",
+    "redis": "^5.5.6",
+    "sharp": "^0.34.2",
+    "socket.io": "^4.8.1",
+    "tailwindcss": "^4.1.11"
+  }
+}

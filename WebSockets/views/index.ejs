@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./output.css">
+</head>
+<body>
+  
+
+  <!-- <div class="w-full h-screen text-white bg-zinc-900">
+    <div class=" flex gap-4 justify-center items-center py-20">
+      <button id="connectBtn" class="send px-5 py-3 bg-blue-500 rounded">Connect to Server</button>
+      <button id="disconnectBtn" class="send px-5 py-3 bg-red-500 rounded">Disconnect From Server</button>
+    </div>
+  </div> -->
+
+
+
+   <div class="w-full h-screen text-white bg-zinc-900">
+    <div class=" flex gap-4 justify-center items-center py-20">
+      <input type="text" class="messagebox px-3 py-3 bg-zinc-800 rounded border-none outline-none" placeholder="Data">
+
+      <button class="event px-5 py-3 bg-blue-500 rounded">Send Some Event</button>
+      
+    </div>
+  </div>
+
+  
+
+
+
+
+ <!-- ✅ Load the Socket.IO client library from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/socket.io@4.8.1/client-dist/socket.io.min.js"></script>
+
+
+  <script>
+    // io();  // ✅ Connects to the server at the same origin (e.g. localhost:3000)
+
+    //  const socket = io();  // or io.connect()
+
+    //  socket.emit('abcd',21);
+
+     // send custom event from fronted to backend 
+  //   // ✅ Listen for response from server 
+  // socket.on('reply',function(msg) {
+  //   console.log('Server says:',msg); // 👈 You’ll see this in browser console
+  // });
+
+
+  //    socket.emit('defg',23);
+
+  // //     // ✅ Listen for response from server 
+  // socket.on('reply',function(msg) {
+  //   console.log('Server says:',msg); // 👈 You’ll see this in browser console
+  // });
+
+
+  //  socket.emit('typing',25);
+
+  //  socket.on('yes',function(msg){
+  //  console.log('type from server:',msg);
+  //  })
+
+
+// let socket;
+
+//  const ConnectBtn=document.querySelector('#connectBtn');
+//  const DisconnectBtn=document.querySelector('#disconnectBtn');
+
+//  ConnectBtn.addEventListener('click',function(){
+//   socket=io();
+
+//   socket.emit('connect akash',90);
+  
+//   socket.on('event',function(msg){
+//     console.log(`Connect to server: ${msg}`);
+//   })
+
+//  })
+
+//  DisconnectBtn.addEventListener('click',function(){
+//  socket.disconnect();
+ 
+//  })
+
+
+let socket=io();
+
+
+var inp=document.querySelector('input');
+
+
+document.querySelector('.event').
+addEventListener('click',function(){
+  const data = inp.value;  // ✅ get current value when button is clicked
+  socket.emit('somemessage',data);
+})
+
+socket.on('message',function(msg){
+    console.log('Messages data: ',msg);
+})
+
+
+inp.addEventListener('input',function(){
+socket.emit('typing');
+socket.on('hello',function(){
+  console.log('akash typing...');
+})
+})
+
+
+
+  </script>
+
+
+</body>
+</html>
+
