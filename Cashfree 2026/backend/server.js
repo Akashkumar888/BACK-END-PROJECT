@@ -48,6 +48,10 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📱 Frontend should be running on http://localhost:5173`);
+<<<<<<< HEAD
 }); 
 
 
+=======
+}); 
+>>>>>>> 036cfbafd45e80a69d278f295a2cb65dd06f5e5f
