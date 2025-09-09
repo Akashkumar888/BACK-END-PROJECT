@@ -4,8 +4,8 @@ import { useState } from 'react';
 function App() {
   const [amountInput, setAmountInput] = useState('');
 
-  const paymentHandler = async (event) => {
-    event.preventDefault();
+  const paymentHandler = async (e) => {
+    e.preventDefault();
 
     if (!amountInput || isNaN(amountInput) || Number(amountInput) <= 0) {
       alert("Please enter a valid amount");
@@ -14,56 +14,53 @@ function App() {
 
     const amount = parseInt(amountInput) * 100; // convert to paise
     const currency = 'INR';
-    const receiptId = 'receipt#' + Math.floor(Math.random() * 1000000);
+    const receipt = 'receipt_' + Date.now();
 
-    // Fetch key and order from backend
-    const keyResponse = await fetch('http://localhost:3000/getkey');
-    const { key } = await keyResponse.json();
+    try {
+      // 1️⃣ Create order on backend
+      const orderRes = await fetch('http://localhost:4000/api/razorpay/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount, currency, receipt })
+      });
+      const { order } = await orderRes.json();
 
-    const orderResponse = await fetch('http://localhost:3000/order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount, currency, receipt: receiptId })
-    });
+      // 2️⃣ Razorpay options
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID, // from frontend .env
+        amount,
+        currency,
+        name: "My App",
+        description: "Test Transaction",
+        order_id: order.id,
+        handler: async function (response) {
+          // 3️⃣ Verify payment on backend
+          const validateRes = await fetch("http://localhost:4000/api/razorpay/verify-order", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(response)
+          });
 
-    const order = await orderResponse.json();
+          const data = await validateRes.json();
+          alert(data.message || "Payment Successful!");
+        },
+        prefill: {
+          name: "Test User",
+          email: "test@example.com",
+          contact: "9999999999"
+        },
+        theme: { color: "#3399cc" }
+      };
 
-    const options = {
-      key: key,
-      amount,
-      currency,
-      name: "Web Codder",
-      description: "Test Transaction",
-      image: "https://i.ibb.co/5Y3m33n/test.png",
-      order_id: order.id,
-      handler: async function (response) {
-        const validateRes = await fetch("http://localhost:3000/validate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(response)
-        });
-        const resData = await validateRes.json();
-        console.log(resData);
-        alert("Payment successful and verified!");
-      },
-      prefill: {
-        name: "Web Codder",
-        email: "test@example.com",
-        contact: "9999999999"
-      },
-      notes: {
-        address: "Web Codder HQ"
-      },
-      theme: {
-        color: "#3399cc"
-      }
-    };
-
-    const rzp = new window.Razorpay(options);
-    rzp.on("payment.failed", function (response) {
-      alert("Payment failed: " + response.error.description);
-    });
-    rzp.open();
+      const rzp = new window.Razorpay(options);
+      rzp.on("payment.failed", (err) => {
+        alert("Payment failed: " + err.error.description);
+      });
+      rzp.open();
+    } catch (err) {
+      console.error("Payment error:", err);
+      alert("Something went wrong!");
+    }
   };
 
   return (
@@ -75,7 +72,6 @@ function App() {
           value={amountInput}
           placeholder="Enter amount"
           onChange={(e) => setAmountInput(e.target.value)}
-          required
         />
         <button className='button' type="submit">Pay Now</button>
       </form>
@@ -84,4 +80,3 @@ function App() {
 }
 
 export default App;
-
